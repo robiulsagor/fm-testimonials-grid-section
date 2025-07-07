@@ -1,3 +1,17 @@
+:root {
+  --purple-50: hsl(260, 100%, 95%);
+  --purple-300: hsl(264, 82%, 80%);
+  --purple-500: hsl(263, 55%, 52%);
+
+  --white: hsl(0, 0%, 100%);
+  --grey-100: hsl(214, 17%, 92%);
+  --grey-200: hsl(0, 0%, 81%);
+  --grey-400: hsl(224, 10%, 45%);
+  --grey-500: hsl(217, 19%, 35%);
+  --dark-blue: hsl(219, 29%, 14%);
+  --black: hsl(0, 0%, 7%);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -9,10 +23,8 @@ body {
 }
 
 .wrapper {
-  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  border: 1px solid #942121;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -21,71 +33,166 @@ body {
 
 .container {
   width: 100%;
+  max-width: 1220px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  align-items: baseline;
-  align-content: center;
-  /* justify-content: safe; */
-  justify-self: baseline;
-  gap: 20px;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+  gap: 30px;
+  padding-bottom: 0px;
 }
 
 .card {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  border-radius: 20px;
+  box-shadow: 10px 10px 90px rgba(0, 0, 0, 0.3);
+  padding: 2.3rem;
+  border-radius: 10px;
+  width: 90%;
+  margin: 0 auto;
+  max-width: 320px;
+  position: relative;
 }
 
 .card:first-child {
-  grid-column: span 2;
+  grid-column: auto;
+  background: var(--purple-500);
+  color: var(--white);
+  z-index: 10;
+}
+
+/* quote image hidden for small screen */
+.quote-img {
+  position: absolute;
+  top: 0.3rem;
+  right: 5rem;
+  z-index: -1;
+  display: none;
+}
+
+.card:nth-child(2) {
+  background: var(--grey-500);
+  color: var(--white);
 }
 
 .card:nth-child(3) {
-  grid-row: 2 / span 1;
+  grid-row: auto;
 }
 
 .card:nth-child(4) {
-  grid-column: 2 / span 2;
-  background: #000000d1;
-  color: white !important;
+  grid-column: auto;
+  background: var(--dark-blue);
 }
 
 .card:nth-child(5) {
-  grid-area: 1 / 4 /4 /4;
+  grid-area: auto;
 }
 
 .card__header {
   display: flex;
+  font-size: 1.25rem;
   gap: 15px;
 }
 
+/* 3rd and 5th card header color should be grey-500 */
+.card:nth-child(3) .card__header,
+.card:nth-child(5) .card__header {
+  color: var(--grey-500);
+}
+
+/* 1st, 2nd and 4th card header color should be grey-100*/
+.card:nth-child(1) .card__header,
+.card:nth-child(2) .card__header,
+.card:nth-child(4) .card__header {
+  color: var(--grey-100);
+}
+
 .card__image {
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
-  border: 2px solid #942121;
 }
 
+/* card-image or author image border for 1st and 4th card  */
+.card:nth-child(1) .card__image,
+.card:nth-child(4) .card__image {
+  border: 3px solid var(--purple-300);
+}
+
+/* card-image or author image border for 2nd, 3rd and 5th card */
+.card:nth-child(2) .card__image,
+.card:nth-child(3) .card__image,
+.card:nth-child(5) .card__image {
+  border: 3px solid var(--white);
+}
+
+/* author name */
 .card__name {
-  font-size: 1.2rem;
-  font-weight: 500;
-  /* color: #333; */
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.1rem;
 }
 
+/* author role */
 .card__role {
-  font-size: 0.875rem;
+  font-size: 0.8rem;
 }
 
+/* testimonial title */
 .card__testimonial__title {
-  font-size: 1.5rem;
-  /* color: #666; */
+  font-size: 1.3rem;
   margin-top: 20px;
   font-weight: 600;
+  color: var(--grey-500);
 }
 
+/* testimonial body */
 .card__testimonial__text {
-  font-size: 1rem;
-  /* color: #333; */
+  font-size: 0.9rem;
   margin-top: 20px;
+  color: var(--grey-400);
+  font-weight: 500;
+}
+
+/* testimonial title and body colors for 1st, 2nd and 4th card */
+.card:first-child .card__testimonial__title,
+.card:first-child .card__testimonial__text,
+.card:nth-child(2) .card__testimonial__title,
+.card:nth-child(2) .card__testimonial__text,
+.card:nth-child(4) .card__testimonial__title,
+.card:nth-child(4) .card__testimonial__text {
+  color: var(--grey-100);
+}
+
+@media screen and (min-width: 1200px) {
+  .container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .card {
+    width: 100%;
+    max-width: none;
+  }
+
+  /* show the qoute image which is hidden on small screen */
+  .quote-img {
+    display: block;
+  }
+
+  .card:first-child {
+    grid-column: span 2;
+  }
+
+  .card:nth-child(3) {
+    grid-row: 2 / span 1;
+  }
+
+  .card:nth-child(3) .card__testimonial__title {
+    width: 90%;
+  }
+
+  .card:nth-child(4) {
+    grid-column: 2 / span 2;
+  }
+
+  .card:nth-child(5) {
+    grid-area: 1 / 4 /3 /5;
+  }
 }
